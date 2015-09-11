@@ -1,0 +1,9 @@
+{
+  "name": "html",
+  "version": "0.0.0",
+  "main": "src/html",
+  "jspm": {
+    "registry": "github",
+    "directories": {}
+  }
+}
