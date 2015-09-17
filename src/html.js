@@ -14,6 +14,7 @@ if(typeof window !== "undefined") {
 	
 	
 	exports.instantiate = function(load) {
+		return void 0;
 		try {
 			var dom = load.metadata.link.import;
 			var template = dom.querySelector("template");
