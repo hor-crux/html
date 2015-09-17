@@ -14,11 +14,15 @@ if(typeof window !== "undefined") {
 	
 	
 	exports.instantiate = function(load) {
-		var dom = load.metadata.link.import;
-		var template = dom.querySelector("template");
-		if(typeof template !== "undefined")
-			dom.template = template;
-		return dom;
+		try {
+			var dom = load.metadata.link.import;
+			var template = dom.querySelector("template");
+			if(typeof template !== "undefined")
+				dom.template = template;
+			return dom;
+		} catch(e) {
+			return void 0;
+		}
 	}
 }
 else {
@@ -37,7 +41,7 @@ else {
 		.then(function(builder) {
       		return builder.call(loader, loads, opts);
     	}, function(err) {
-      		throw new Error('Install Polymer/vulcanize via `jspm install npm:vulcanize` for HTML build support. Set System.buildHTML = false to skip HTML builds.');
+      		throw new Error('Error while bundling html files');
     	});
   };
 }

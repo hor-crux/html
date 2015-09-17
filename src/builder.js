@@ -13,6 +13,14 @@ function fromFileURL(address) {
   return address;
 }
 	
+function htmlImport(name) {
+	return [
+		"var l = document.createElement('link');",
+		"l.rel = 'import';",
+		"l.href = '" + name + "'",
+		"document.head.appendChild(l);"
+	].join('\n');
+}
 	
 module.exports = function(loads, opts) {
 	console.log("bundling html files...");
@@ -23,13 +31,15 @@ module.exports = function(loads, opts) {
 		return fs.readFileSync(fromFileURL(load.address));
 	}).join('\n');
 
+	/*
 	var stubDefines =loads.map(function(load) {
 		return "System\.register('" + load.name + "', [], false, function() {});";
 	}).join('\n');
+	*/
 
 	return new Promise(function(resolve, reject) {
 		fs.writeFileSync(outFile, output);
-		resolve(stubDefines);
+		resolve(htmlImport(outFile));
 	});
 
 }
